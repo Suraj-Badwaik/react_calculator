@@ -20,17 +20,20 @@ export const reducer = (state, action) => {
       return { ...state };
     }
     case ADD_TO_COUNTER: {
-        // state.count += state.value;
+        state.count += state.value;
         return {...state}
     }
     case SUBSTRACT_FROM_COUNTER:{
+        state.count -= state.value;
         return {...state
         }
     }
     case MULTIPLY_TO_COUNTER:{
+        state.count = state.count * state.value;
         return {...state}
     }
     case DIVIDE_COUNTER:{
+        state.count = state.count / state.value;
         return {...state}
     }
     default: {

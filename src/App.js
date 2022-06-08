@@ -11,14 +11,12 @@ import {
 } from "./store/action";
 
 function App() {
-  // let value = useSelector((state) => state.value);
+  let value = useSelector((state) => state.value);
   const [a, setValue] = useState("");
   const dispatch = useDispatch();
   const count = useSelector((state) => state.count);
 
-  // value = +a;
-  // console.log('value:', value)
-
+  console.log("a",a);
   return (
     <div className={style.App}>
       <h2>React Calculator</h2>
@@ -32,10 +30,10 @@ function App() {
           <input type="text" placeholder="Input here" onChange={(e) => setValue(e.target.value)} />
         </div>
         <div className={style.secDiv_btns}>
-          <button onClick={() => dispatch(addToCounter)}>Add</button>
-          <button onClick={() => dispatch(subFromCounter)}>Multiply</button>
-          <button onClick={() => dispatch(MultiToCounter)}>Substract</button>
-          <button onClick={() => dispatch(divideCounter)}>Divide</button>
+          <button onClick={() => dispatch(addToCounter())}>Add</button>
+          <button onClick={() => dispatch(subFromCounter())}>Substract</button>
+          <button onClick={() => dispatch(MultiToCounter())}>Multiply</button>
+          <button onClick={() => dispatch(divideCounter())}>Divide</button>
         </div>
       </div>
     </div>

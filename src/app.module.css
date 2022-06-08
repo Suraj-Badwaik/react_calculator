@@ -1,0 +1,91 @@
+.App {
+  text-align: center;
+  /* border: 2px solid red; */
+  border-radius: 20px;
+  width: 25%;
+  margin: auto;
+  margin-top: 5%;
+  padding: 2% 2% 5% 2%;
+  height: auto;
+  background-color: #060656;
+  box-shadow: rgb(18, 21, 24) 3px 3px 6px 0px inset, rgba(8, 5, 47, 0.5) -3px -3px 6px 1px inset;
+}
+.App>h2{
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: white;
+  text-transform: uppercase;
+}
+.App h1{
+  border: 1px solid gray;
+  padding: 3%;
+  background-color: #014001;
+}
+.firstDiv{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.firstDiv button{
+  width: 40%;
+  height: 40px;
+  font-size: 18px;
+  color: white;
+  box-shadow: rgba(252, 251, 251, 0.24) 0px 3px 8px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.firstDiv button:nth-child(1){
+  background-color: #9f0303;
+}
+
+.firstDiv button:nth-child(2){
+  background-color: #629940;
+}
+
+.secDiv{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4%;
+  /* border: 1px solid red; */
+  height: 100px;
+}
+.secDiv_input{
+  width: 30%;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.secDiv_input input{
+  width: 100%;
+  height:50%;
+  background-color: #014001;
+  border: 0.2px solid white;
+  text-align: center;
+}
+
+.secDiv_btns{
+  /* border: 1px solid red; */
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.secDiv_btns button{
+  cursor: pointer;
+  width: 40%;
+  margin: 1px 1px;
+  background-color: #1f1f1f;
+  color: white;
+  box-shadow: rgba(252, 251, 251, 0.24) 0px 3px 8px;
+  border: 0px solid white;
+}
+
+
+
+

@@ -2,17 +2,16 @@
   text-align: center;
   /* border: 2px solid red; */
   border-radius: 20px;
-  width: 25%;
+  width: 20%;
   margin: auto;
   margin-top: 5%;
   padding: 2% 2% 5% 2%;
   height: auto;
-  background-color: #060656;
-  box-shadow: rgb(18, 21, 24) 3px 3px 6px 0px inset, rgba(8, 5, 47, 0.5) -3px -3px 6px 1px inset;
+  background-color: #bcb9c4;
+  box-shadow: rgb(157, 158, 159) 3px 3px 6px 0px inset, rgba(124, 124, 126, 0.5) -3px -3px 6px 1px inset;
 }
 .App>h2{
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  color: white;
   text-transform: uppercase;
 }
 .App h1{
@@ -34,16 +33,18 @@
   box-shadow: rgba(252, 251, 251, 0.24) 0px 3px 8px;
   font-weight: bold;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
+  border-radius: 4px;
 }
 
 .firstDiv button:nth-child(1){
   background-color: #9f0303;
+  box-shadow: rgb(89, 2, 2) 3px 3px 6px 0px inset, rgb(97, 1, 1) -3px -3px 6px 1px inset;
 }
 
 .firstDiv button:nth-child(2){
   background-color: #629940;
+  box-shadow: rgb(47, 111, 2) 3px 3px 6px 0px inset, rgb(44, 112, 2) -3px -3px 6px 1px inset;
 }
 
 .secDiv{
@@ -78,12 +79,12 @@
 
 .secDiv_btns button{
   cursor: pointer;
-  width: 40%;
+  width: 45%;
   margin: 1px 1px;
-  background-color: #1f1f1f;
+  background-color: #7c7979;
   color: white;
-  box-shadow: rgba(252, 251, 251, 0.24) 0px 3px 8px;
-  border: 0px solid white;
+  box-shadow: rgb(104, 104, 104) 3px 3px 6px 0px inset, rgba(95, 95, 95) -3px -3px 6px 1px inset;
+  border: none;
 }
 
 

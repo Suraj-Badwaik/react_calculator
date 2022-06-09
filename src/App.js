@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./app.module.css";
 import {
@@ -10,13 +10,20 @@ import {
   substract,
 } from "./store/action";
 
+
+
+
 function App() {
-  let value = useSelector((state) => state.value);
+ 
   const [a, setValue] = useState("");
   const dispatch = useDispatch();
   const count = useSelector((state) => state.count);
-
+  
   console.log("a",a);
+  localStorage.setItem('input',JSON.stringify(a));
+ 
+  
+  
   return (
     <div className={style.App}>
       <h2>React Calculator</h2>

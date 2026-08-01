@@ -1,0 +1,69 @@
+/* =====================================
+   Colors
+===================================== */
+
+:root {
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+
+  --secondary-color: #334155;
+
+  --background: #f4f7fb;
+  --calculator-bg: #ffffff;
+
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+
+  --border-color: #dbe2ea;
+
+  --danger: #ef4444;
+
+  --operator-bg: #2563eb;
+  --operator-hover: #f57b2f;
+  --operator-active: #f57b2f;
+
+  --equal-bg: #22c55e;
+  --equal-hover: #16a34a;
+}
+
+/* =====================================
+   Shadows
+===================================== */
+
+:root {
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.08);
+
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* =====================================
+   Radius
+===================================== */
+
+:root {
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+}
+
+/* =====================================
+   Spacing
+===================================== */
+
+:root {
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+}
+
+/* =====================================
+   Transition
+===================================== */
+
+:root {
+  --transition: 0.25s ease;
+}

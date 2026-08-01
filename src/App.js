@@ -1,360 +1,127 @@
-import React, { useEffect, useState } from "react";
-import styles from "./app.module.css";
-import {
-  FaPlus,
-  FaMinus,
-  FaTimes,
-  FaDivide,
-  FaEquals,
-  FaBackspace,
-} from "react-icons/fa";
+import React, { useEffect } from "react";
+import layoutStyles from "./styles/calculator.module.css";
+import buttonStyles from "./styles/buttons.module.css";
+
+import Display from "./components/Display";
+import NumberButton from "./components/NumberButton";
+import OperatorButton from "./components/OperatorButton";
+
+import useCalculator from "./hooks/useCalculator";
+
+import { NUMBER_BUTTONS, OPERATOR_BUTTONS } from "./utils/constants";
+
+import { FaEquals, FaBackspace } from "react-icons/fa";
+import useKeyboard from "./hooks/useKeyboard";
 
 const App = () => {
-  const [display, setDisplay] = useState("0");
-  const [firstValue, setFirstValue] = useState(null);
-  const [operator, setOperator] = useState("");
-  const [waitingForSecondValue, setWaitingForSecondValue] = useState(false);
-  const [history, setHistory] = useState("");
+  const {
+    display,
+    history,
+    operator,
 
-  // =========================
-  // Number Click
-  // =========================
+    appendNumber,
+    appendDecimal,
 
-  const appendNumber = (num) => {
-    if (waitingForSecondValue) {
-      setDisplay(String(num));
-      setWaitingForSecondValue(false);
-      return;
-    }
+    handleOperator,
+    handleEqual,
 
-    setDisplay((prev) => (prev === "0" ? String(num) : prev + String(num)));
-  };
+    clearCalculator,
+    backspace,
 
-  // =========================
-  // Decimal
-  // =========================
+    toggleSign,
+    percentage,
 
-  const appendDecimal = () => {
-    if (waitingForSecondValue) {
-      setDisplay("0.");
-      setWaitingForSecondValue(false);
-      return;
-    }
+    increment,
+    decrement,
+  } = useCalculator();
 
-    if (!display.includes(".")) {
-      setDisplay(display + ".");
-    }
-  };
-
-  // =========================
-  // Clear
-  // =========================
-
-  const clearCalculator = () => {
-    setDisplay("0");
-    setFirstValue(null);
-    setOperator("");
-    setHistory("");
-    setWaitingForSecondValue(false);
-  };
-
-  // =========================
-  // Backspace
-  // =========================
-
-  const backspace = () => {
-    if (waitingForSecondValue) return;
-
-    if (display.length <= 1) {
-      setDisplay("0");
-      return;
-    }
-
-    setDisplay(display.slice(0, -1));
-  };
-
-  // =========================
-  // Toggle Sign
-  // =========================
-
-  const toggleSign = () => {
-    setDisplay(String(Number(display) * -1));
-  };
-
-  // =========================
-  // Percentage
-  // =========================
-
-  const percentage = () => {
-    setDisplay(String(Number(display) / 100));
-  };
-
-  // =========================
-  // Increment
-  // =========================
-
-  const increment = () => {
-    setDisplay(String(Number(display) + 1));
-  };
-
-  // =========================
-  // Decrement
-  // =========================
-
-  const decrement = () => {
-    setDisplay(String(Number(display) - 1));
-  };
-
-  // =========================
-  // Actual Calculation
-  // =========================
-
-  const calculate = (first, second, op) => {
-    first = Number(first);
-    second = Number(second);
-
-    let result = 0;
-
-    switch (op) {
-      case "+":
-        result = first + second;
-        break;
-
-      case "-":
-        result = first - second;
-        break;
-
-      case "*":
-        result = first * second;
-        break;
-
-      case "/":
-        if (second === 0) return "Error";
-        result = first / second;
-        break;
-
-      default:
-        result = second;
-    }
-
-    return Number(result.toFixed(8));
-  };
-
-  // =========================
-  // Operator Click
-  // =========================
-
-  const handleOperator = (nextOperator) => {
-    const inputValue = Number(display);
-
-    // If operator is pressed twice, just change the operator
-    if (waitingForSecondValue) {
-      setOperator(nextOperator);
-      setHistory(`${firstValue} ${nextOperator}`);
-      return;
-    }
-
-    if (firstValue === null) {
-      setFirstValue(inputValue);
-    } else {
-      const result = calculate(firstValue, inputValue, operator);
-
-      setDisplay(String(result));
-      setFirstValue(result);
-    }
-
-    setOperator(nextOperator);
-    setWaitingForSecondValue(true);
-    setHistory(`${firstValue ?? inputValue} ${nextOperator}`);
-  };
-
-  // =========================
-  // Equal
-  // =========================
-
-  const handleEqual = () => {
-    if (firstValue === null || operator === "" || waitingForSecondValue) {
-      return;
-    }
-
-    const result = calculate(firstValue, display, operator);
-
-    setHistory(`${firstValue} ${operator} ${display} =`);
-
-    setDisplay(String(result));
-
-    setFirstValue(result);
-    setOperator("");
-    setWaitingForSecondValue(true);
-  };
-
-  // =========================
+  // =====================================
   // Keyboard Support
-  // =========================
+  // =====================================
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (/^[0-9]$/.test(e.key)) {
-        appendNumber(e.key);
-      }
-
-      switch (e.key) {
-        case ".":
-          appendDecimal();
-          break;
-
-        case "+":
-          handleOperator("+");
-          break;
-
-        case "-":
-          handleOperator("-");
-          break;
-
-        case "*":
-          handleOperator("*");
-          break;
-
-        case "/":
-          e.preventDefault();
-          handleOperator("/");
-          break;
-
-        case "Enter":
-        case "=":
-          e.preventDefault();
-          handleEqual();
-          break;
-
-        case "Backspace":
-          backspace();
-          break;
-
-        case "Escape":
-          clearCalculator();
-          break;
-
-        default:
-          break;
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [display, firstValue, operator, waitingForSecondValue]);
-
-  // =========================
-  // Number Buttons
-  // =========================
-
-  const numberButtons = [7, 8, 9, 4, 5, 6, 1, 2, 3];
-
-  const renderNumberButton = (num) => (
-    <button
-      key={num}
-      className={styles.numberBtn}
-      onClick={() => appendNumber(num)}
-    >
-      {num}
-    </button>
-  );
+  useKeyboard({
+    appendNumber,
+    appendDecimal,
+    handleOperator,
+    handleEqual,
+    backspace,
+    clearCalculator,
+  });
 
   return (
-    <div className={styles.container}>
-      <div className={styles.calculator}>
-        <h2 className={styles.heading}>React Calculator</h2>
+    <div className={layoutStyles.container}>
+      <div className={layoutStyles.calculator}>
+        <h2 className={layoutStyles.heading}>React Calculator</h2>
 
-        <div className={styles.history}>{history || " "}</div>
+        <Display history={history} display={display} />
 
-        <div className={styles.display}>{display}</div>
-
-        <div className={styles.body}>
-          <div className={styles.leftSection}>
-            <div className={styles.utilityRow}>
-              <button className={styles.utilityBtn} onClick={clearCalculator}>
+        <div className={layoutStyles.body}>
+          {/* Left Section */}
+          <div className={layoutStyles.leftSection}>
+            {/* Utility Buttons */}
+            <div className={layoutStyles.utilityRow}>
+              <button
+                className={buttonStyles.utilityBtn}
+                onClick={clearCalculator}
+              >
                 C
               </button>
 
-              <button className={styles.utilityBtn} onClick={backspace}>
+              <button className={buttonStyles.utilityBtn} onClick={backspace}>
                 <FaBackspace />
               </button>
 
-              <button className={styles.utilityBtn} onClick={toggleSign}>
+              <button className={buttonStyles.utilityBtn} onClick={toggleSign}>
                 ±
               </button>
 
-              <button className={styles.utilityBtn} onClick={percentage}>
+              <button className={buttonStyles.utilityBtn} onClick={percentage}>
                 %
               </button>
             </div>
 
-            <div className={styles.numberGrid}>
-              {numberButtons.map(renderNumberButton)}
+            {/* Number Grid */}
+            <div className={layoutStyles.numberGrid}>
+              {NUMBER_BUTTONS.map((num) => (
+                <NumberButton key={num} value={num} onClick={appendNumber} />
+              ))}
+
+              <NumberButton value={0} onClick={appendNumber} />
 
               <button
-                className={styles.numberBtn}
-                onClick={() => appendNumber(0)}
+                className={buttonStyles.numberBtn}
+                onClick={appendDecimal}
               >
-                0
-              </button>
-
-              <button className={styles.numberBtn} onClick={appendDecimal}>
                 .
               </button>
 
-              <button className={styles.equalBtn} onClick={handleEqual}>
+              <button className={buttonStyles.equalBtn} onClick={handleEqual}>
                 <FaEquals />
               </button>
             </div>
 
-            <div className={styles.incrementRow}>
-              <button className={styles.incrementBtn} onClick={increment}>
+            {/* Increment / Decrement */}
+            <div className={layoutStyles.incrementRow}>
+              <button className={buttonStyles.incrementBtn} onClick={increment}>
                 +1
               </button>
 
-              <button className={styles.incrementBtn} onClick={decrement}>
+              <button className={buttonStyles.incrementBtn} onClick={decrement}>
                 -1
               </button>
             </div>
           </div>
 
-          <div className={styles.operatorColumn}>
-            <button
-              className={`${styles.operatorBtn} ${
-                operator === "/" ? styles.active : ""
-              }`}
-              onClick={() => handleOperator("/")}
-            >
-              <FaDivide />
-            </button>
-
-            <button
-              className={`${styles.operatorBtn} ${
-                operator === "*" ? styles.active : ""
-              }`}
-              onClick={() => handleOperator("*")}
-            >
-              <FaTimes />
-            </button>
-
-            <button
-              className={`${styles.operatorBtn} ${
-                operator === "-" ? styles.active : ""
-              }`}
-              onClick={() => handleOperator("-")}
-            >
-              <FaMinus />
-            </button>
-
-            <button
-              className={`${styles.operatorBtn} ${
-                operator === "+" ? styles.active : ""
-              }`}
-              onClick={() => handleOperator("+")}
-            >
-              <FaPlus />
-            </button>
+          {/* Right Section */}
+          <div className={layoutStyles.operatorColumn}>
+            {OPERATOR_BUTTONS.map((item) => (
+              <OperatorButton
+                key={item.value}
+                value={item.value}
+                activeOperator={operator}
+                onClick={handleOperator}
+              />
+            ))}
           </div>
         </div>
       </div>

@@ -1,0 +1,140 @@
+/* ==========================================
+   Base Button
+========================================== */
+
+.numberBtn,
+.utilityBtn,
+.operatorBtn,
+.equalBtn,
+.incrementBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 56px;
+
+  border: none;
+  border-radius: var(--radius-md);
+
+  font-size: 1.1rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all var(--transition);
+
+  user-select: none;
+}
+
+/* ==========================================
+   Number Buttons
+========================================== */
+
+.numberBtn {
+  background: #ffffff;
+  color: var(--text-primary);
+
+  border: 1px solid var(--border-color);
+
+  box-shadow: var(--shadow-sm);
+}
+
+.numberBtn:hover {
+  background: #f8fafc;
+  transform: translateY(-2px);
+}
+
+.numberBtn:active {
+  transform: scale(0.97);
+}
+
+/* ==========================================
+   Utility Buttons
+========================================== */
+
+.utilityBtn {
+  background: #f1f5f9;
+
+  color: var(--text-primary);
+
+  border: 1px solid var(--border-color);
+}
+
+.utilityBtn:hover {
+  background: #e2e8f0;
+}
+
+/* ==========================================
+   Increment / Decrement
+========================================== */
+
+.incrementBtn {
+  background: #dbeafe;
+
+  color: var(--primary-color);
+
+  border: 1px solid #bfdbfe;
+}
+
+.incrementBtn:hover {
+  background: #bfdbfe;
+}
+
+/* ==========================================
+   Equal Button
+========================================== */
+
+.equalBtn {
+  background: var(--equal-bg);
+
+  color: white;
+
+  box-shadow: var(--shadow-sm);
+}
+
+.equalBtn:hover {
+  background: var(--equal-hover);
+
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   Operator Buttons
+========================================== */
+
+.operatorBtn {
+  background: var(--operator-bg);
+
+  color: white;
+
+  box-shadow: var(--shadow-sm);
+}
+
+.operatorBtn:hover {
+  background: var(--operator-hover);
+
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   Active Operator
+========================================== */
+
+.active {
+  background: var(--operator-active);
+
+  transform: scale(0.95);
+}
+
+/* ==========================================
+   Focus
+========================================== */
+
+.numberBtn:focus-visible,
+.utilityBtn:focus-visible,
+.operatorBtn:focus-visible,
+.equalBtn:focus-visible,
+.incrementBtn:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.25);
+  outline-offset: 2px;
+}

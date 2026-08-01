@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import layoutStyles from "./styles/calculator.module.css";
 import buttonStyles from "./styles/buttons.module.css";
 
